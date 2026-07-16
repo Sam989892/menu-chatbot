@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Loader2, SendHorizonal, UtensilsCrossed } from 'lucide-react'
+import { Loader2, SendHorizonal } from 'lucide-react'
 import MenuSidebar from '@/components/MenuSidebar'
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string }
@@ -32,7 +32,6 @@ export default function Home() {
     setBusy(true)
 
     const history: ChatMessage[] = [...messages, { role: 'user', content: trimmed }]
-    // add the user message plus an empty assistant bubble to stream into
     setMessages([...history, { role: 'assistant', content: '' }])
 
     try {
@@ -64,7 +63,6 @@ export default function Home() {
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong.')
-      // drop the empty assistant bubble on failure
       setMessages((prev) => (prev[prev.length - 1]?.content === '' ? prev.slice(0, -1) : prev))
     } finally {
       setBusy(false)
@@ -72,17 +70,20 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-5 py-8">
-      <header className="mb-6 text-center">
-        <span className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-700 text-white">
-          <UtensilsCrossed size={22} />
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 py-8">
+      {/* signboard header */}
+      <header className="mb-6 flex items-center gap-4 rounded-2xl border border-line bg-char-2 px-6 py-5">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-paprika font-display text-2xl font-bold text-cream">
+          GF
         </span>
-        <h1 className="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-white">
-          Ask the menu anything
-        </h1>
-        <p className="mt-1.5 text-sm text-stone-500 dark:text-stone-400">
-          A menu chatbot for The Green Fork. Vegan options, allergens, pairings — just ask.
-        </p>
+        <div className="flex-1">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-cream sm:text-3xl">
+            Ask the menu
+          </h1>
+          <p className="text-sm text-cream-dim">
+            The Green Fork&apos;s table assistant. Allergens, vegan picks, what pairs with what.
+          </p>
+        </div>
       </header>
 
       <div className="grid flex-1 gap-5 lg:grid-cols-[320px_1fr]">
@@ -91,17 +92,17 @@ export default function Home() {
         </div>
 
         {/* chat */}
-        <div className="flex max-h-[70vh] flex-col rounded-2xl border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
+        <div className="flex max-h-[70vh] flex-col rounded-2xl border border-line bg-char-2">
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-5">
             {messages.length === 0 && (
               <div className="flex h-full flex-col items-center justify-center gap-4">
-                <p className="text-sm text-stone-400">Try one of these:</p>
+                <p className="font-display text-sm uppercase tracking-widest text-cream-dim">Ask me anything</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {SUGGESTIONS.map((s) => (
                     <button
                       key={s}
                       onClick={() => send(s)}
-                      className="cursor-pointer rounded-full border border-stone-200 px-4 py-2 text-sm text-stone-600 transition-colors hover:border-emerald-600 hover:text-emerald-700 dark:border-stone-700 dark:text-stone-300"
+                      className="cursor-pointer rounded-full border border-line bg-char-3 px-4 py-2 text-sm text-cream transition-colors hover:border-paprika hover:text-paprika"
                     >
                       {s}
                     </button>
@@ -115,12 +116,12 @@ export default function Home() {
                 <div
                   className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed ${
                     m.role === 'user'
-                      ? 'rounded-br-md bg-emerald-700 text-white'
-                      : 'rounded-bl-md bg-stone-100 text-stone-800 dark:bg-stone-800 dark:text-stone-200'
+                      ? 'rounded-br-md bg-paprika text-cream'
+                      : 'rounded-bl-md bg-char-3 text-cream'
                   }`}
                 >
                   {m.content || (
-                    <Loader2 size={16} className="animate-spin text-stone-400" aria-label="Thinking" />
+                    <Loader2 size={16} className="animate-spin text-cream-dim" aria-label="Thinking" />
                   )}
                 </div>
               </div>
@@ -128,7 +129,7 @@ export default function Home() {
           </div>
 
           {error && (
-            <p className="mx-5 mb-2 rounded-xl bg-rose-50 px-4 py-2.5 text-sm text-rose-600 dark:bg-rose-500/10 dark:text-rose-400" role="alert">
+            <p className="mx-5 mb-2 rounded-xl border-l-2 border-paprika bg-paprika/10 px-4 py-2.5 text-sm text-paprika" role="alert">
               {error}
             </p>
           )}
@@ -138,7 +139,7 @@ export default function Home() {
               e.preventDefault()
               send(input)
             }}
-            className="flex gap-2 border-t border-stone-100 p-4 dark:border-stone-800"
+            className="flex gap-2 border-t border-line p-4"
           >
             <input
               value={input}
@@ -146,13 +147,13 @@ export default function Home() {
               placeholder="Ask about the menu…"
               aria-label="Your question"
               maxLength={2000}
-              className="flex-1 rounded-xl border border-stone-200 bg-white px-4 py-3 text-[15px] text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-emerald-600 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"
+              className="flex-1 rounded-xl border border-line bg-char px-4 py-3 text-[15px] text-cream outline-none transition-colors placeholder:text-cream-dim/50 focus:border-paprika"
             />
             <button
               type="submit"
               disabled={busy || !input.trim()}
               aria-label="Send"
-              className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl bg-emerald-700 text-white transition-colors hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl bg-paprika text-cream transition-colors hover:bg-paprika-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <SendHorizonal size={18} />
             </button>
@@ -160,8 +161,8 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="mt-8 text-center text-xs text-stone-400">
-        Concept project by Sam Madni · Next.js + Claude API · Menu lives in data/menu.json
+      <footer className="mt-8 text-center text-xs text-cream-dim/60">
+        Concept project by Sam Madni · menu lives in data/menu.json
       </footer>
     </main>
   )
