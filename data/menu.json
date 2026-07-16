@@ -1,0 +1,49 @@
+{
+  "restaurant": "The Green Fork",
+  "tagline": "Honest food, Leicester",
+  "categories": [
+    {
+      "name": "Breakfast (until 11:30)",
+      "items": [
+        { "name": "Full English", "price": 9.95, "description": "Two eggs any style, bacon, sausage, beans, grilled tomato, toast", "allergens": ["gluten", "egg"], "tags": [] },
+        { "name": "Veggie English", "price": 8.95, "description": "Two eggs, halloumi, veggie sausage, beans, mushrooms, toast", "allergens": ["gluten", "egg", "dairy"], "tags": ["vegetarian"] },
+        { "name": "Avocado Toast", "price": 7.5, "description": "Smashed avocado, chilli flakes, lime, sourdough. Add a poached egg +1.50", "allergens": ["gluten"], "tags": ["vegan", "vegetarian"] },
+        { "name": "Porridge & Berries", "price": 5.5, "description": "Oat milk porridge, mixed berries, maple syrup", "allergens": ["oats"], "tags": ["vegan", "vegetarian", "gluten-free-option"] }
+      ]
+    },
+    {
+      "name": "Mains",
+      "items": [
+        { "name": "Classic Burger", "price": 11.5, "description": "Beef patty, cheddar, lettuce, tomato, house sauce, brioche bun, fries", "allergens": ["gluten", "dairy", "egg"], "tags": [] },
+        { "name": "Buttermilk Chicken Burger", "price": 11.95, "description": "Crispy chicken thigh, slaw, pickles, sriracha mayo, fries", "allergens": ["gluten", "dairy", "egg"], "tags": ["spicy"] },
+        { "name": "Beyond Burger", "price": 10.95, "description": "Plant-based patty, vegan cheese, lettuce, vegan mayo, fries", "allergens": ["gluten", "soy"], "tags": ["vegan", "vegetarian"] },
+        { "name": "Veggie Wrap", "price": 7.95, "description": "Falafel, hummus, roasted peppers, rocket, tahini in a tortilla", "allergens": ["gluten", "sesame"], "tags": ["vegan", "vegetarian"] },
+        { "name": "Katsu Curry Bowl", "price": 12.5, "description": "Panko chicken or tofu, sticky rice, katsu sauce, pickled slaw", "allergens": ["gluten", "soy"], "tags": ["tofu-option-vegan"] },
+        { "name": "Caesar Salad", "price": 9.5, "description": "Baby gem, parmesan, croutons, anchovy dressing. Add grilled chicken +3", "allergens": ["gluten", "dairy", "fish", "egg"], "tags": [] }
+      ]
+    },
+    {
+      "name": "Sides",
+      "items": [
+        { "name": "Skin-on Fries", "price": 3.5, "description": "With rosemary salt", "allergens": [], "tags": ["vegan", "vegetarian", "gluten-free"] },
+        { "name": "Halloumi Fries", "price": 5.5, "description": "With hot honey", "allergens": ["dairy"], "tags": ["vegetarian"] },
+        { "name": "House Slaw", "price": 3.0, "description": "Red cabbage, carrot, vegan mayo", "allergens": [], "tags": ["vegan", "vegetarian", "gluten-free"] }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "items": [
+        { "name": "Sticky Toffee Pudding", "price": 6.5, "description": "Toffee sauce, vanilla ice cream", "allergens": ["gluten", "dairy", "egg"], "tags": ["vegetarian"] },
+        { "name": "Vegan Brownie", "price": 5.95, "description": "Warm, with coconut ice cream", "allergens": ["nuts"], "tags": ["vegan", "vegetarian", "gluten-free"] }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "items": [
+        { "name": "Flat White", "price": 3.4, "description": "Oat milk +0.40", "allergens": ["dairy"], "tags": ["oat-milk-option"] },
+        { "name": "Fresh Orange Juice", "price": 3.95, "description": "Squeezed to order", "allergens": [], "tags": ["vegan", "gluten-free"] },
+        { "name": "House Lemonade", "price": 3.5, "description": "Mint and lime", "allergens": [], "tags": ["vegan", "gluten-free"] }
+      ]
+    }
+  ]
+}
