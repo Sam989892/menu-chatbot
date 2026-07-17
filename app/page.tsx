@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Loader2, SendHorizonal } from 'lucide-react'
+import { Loader2, SendHorizonal, BookOpen, X } from 'lucide-react'
 import MenuSidebar from '@/components/MenuSidebar'
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string }
@@ -18,6 +18,7 @@ export default function Home() {
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [menuOpen, setMenuOpen] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -84,12 +85,37 @@ export default function Home() {
             The Green Fork&apos;s table assistant. Allergens, vegan picks, what pairs with what.
           </p>
         </div>
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-line bg-char-3 px-4 py-2.5 text-sm font-medium text-cream transition-colors hover:border-paprika hover:text-paprika lg:hidden"
+        >
+          <BookOpen size={16} /> Menu
+        </button>
       </header>
 
       <div className="grid flex-1 gap-5 lg:grid-cols-[320px_1fr]">
         <div className="hidden max-h-[70vh] lg:block">
           <MenuSidebar />
         </div>
+
+        {/* mobile menu sheet */}
+        {menuOpen && (
+          <div className="fixed inset-0 z-50 flex flex-col bg-char/95 backdrop-blur-sm lg:hidden">
+            <div className="flex items-center justify-between border-b border-line px-5 py-4">
+              <span className="font-display text-lg font-bold text-cream">The menu</span>
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-cream-dim transition-colors hover:bg-char-3 hover:text-cream"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="flex-1 overflow-hidden p-4">
+              <MenuSidebar />
+            </div>
+          </div>
+        )}
 
         {/* chat */}
         <div className="flex max-h-[70vh] flex-col rounded-2xl border border-line bg-char-2">
